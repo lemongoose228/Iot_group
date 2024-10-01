@@ -12,6 +12,6 @@ void loop() {
         formatted_val = "0" + formatted_val;
     }
   
-    Serial.println(formatted_val);
+    Serial.print(formatted_val);
     delay(500);
 }
