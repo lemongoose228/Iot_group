@@ -6,7 +6,12 @@ void setup() {
 
 void loop() {
     int photo_val = analogRead(PHOTO_SENSOR_PIN);
-    Serial.println(photo_val);
+    
+    String formatted_val = String(photo_val);
+    while (formatted_val.length() < 4) {
+        formatted_val = "0" + formatted_val;
+    }
+  
+    Serial.println(formatted_val);
     delay(500);
-
 }
