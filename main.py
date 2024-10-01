@@ -1,11 +1,11 @@
 import serial
 import time
 responces = {
-    'd': 7, # одидаемый ответ "led_off"
-    'u': 6, # одидаемый ответ "led_on"
-    'p': 4 # отправляется 4 символа если меньше типа 123 то заменяется на 0123
-} #кол-во байт которое будет отправлено в ответ на команду
-port_led = "COM5" # нужно отключить serial monutor или "/dev/COM5"
+    'd': 7, 
+    'u': 6,
+    'p': 4 
+} 
+port_led = "COM5" 
 port_photo = "COM5"
 
 connection_led = serial.Serial(port_led, timeout=1)
@@ -30,10 +30,3 @@ while True:
     else:
         resp = send_command('d', responces['d'], connection_led)
 
-
-
-#while True: для мигания
-#    for command in responces:
-#        resp = send_command(command, responces[command])
-#        print(resp)aaaaaaaaaa
-#        time.sleep(1)
