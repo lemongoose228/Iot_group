@@ -2,9 +2,22 @@
 
 void setup() {
     Serial.begin(9600);
+    pinMode(PHOTO_SENSOR_PIN, INPUT);
 }
 
 void loop() {
+    if (Serial.available() != 0) {
+        switch (Serial.read()) {
+            case 'p':
+                main();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void main(){
     int photo_val = analogRead(PHOTO_SENSOR_PIN);
     
     String formatted_val = String(photo_val);
@@ -13,5 +26,4 @@ void loop() {
     }
   
     Serial.print(formatted_val);
-    delay(500);
 }
