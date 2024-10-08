@@ -1,4 +1,7 @@
 # LedPhotoDistributedSerial
+### Демонстрация работы
+https://drive.google.com/file/d/1uLRBZJi0MQZox95Eha6Udn2tJW_Az58r/view?usp=drivesdk
+---
 
 ### phptoresScript.ino 
 Файл со скриптом для фоторезистора
