@@ -9,7 +9,7 @@ void loop() {
     if (Serial.available() != 0) {
         switch (Serial.read()) {
             case 'p':
-                main();
+                readPhotoSensor();
                 break;
             default:
                 break;
@@ -17,7 +17,7 @@ void loop() {
     }
 }
 
-void main(){
+void readPhotoSensor() {
     int photo_val = analogRead(PHOTO_SENSOR_PIN);
     
     String formatted_val = String(photo_val);
@@ -26,4 +26,4 @@ void main(){
     }
   
     Serial.print(formatted_val);
-}
+} 
