@@ -4,17 +4,16 @@ from uuid import getnode as get_mac
 import hashlib
 import serial
 
-
-port_led = "COM14"
+port_led = "COM16"
 connection_led = serial.Serial(port_led, timeout=1)
 
 broker = "broker.emqx.io"
 pub_id = "bc27bob771"
 
 responses = {
-    'd': 7, 
-    'u': 6, 
-    'p': 4 
+    'd': 7,
+    'u': 6,
+    'p': 4
 }
 
 def send_command(cmd: str,
@@ -40,7 +39,7 @@ sub_id = h.hexdigest()[10:20]
 def on_message(client, userdata, message):
     data = str(message.payload.decode("utf-8"))
     photo_val = int(data)
-    if photo_val:
+    if photo_val and len(str(photo_val)) != 0:
         print("photo_val_resp", photo_val)
         print("photo_val", photo_val)
         if photo_val > 500:
@@ -50,7 +49,6 @@ def on_message(client, userdata, message):
         time.sleep(1)
     else:
         print("Получена пустая строка")
-
 
 client = mqtt_client.Client(
     mqtt_client.CallbackAPIVersion.VERSION2,
