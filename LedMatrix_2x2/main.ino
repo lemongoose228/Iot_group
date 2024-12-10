@@ -38,3 +38,34 @@ void setup() {
     Serial.begin(9600);
 }
 
+void loop() {
+    if (Serial.available() > 0) {
+        String input = Serial.readStringUntil('\n');
+        input.trim();
+
+        int index = -1;
+        for (int i = 0; i < sizeof(combinationsOfLEDS) / sizeof(combinationsOfLEDS[0]); i++) {
+            if (input.equals(combinationsOfLEDS[i])) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            String state = states[index];
+
+            digitalWrite(LED_PIN5, state.charAt(0) - '0');
+            digitalWrite(LED_PIN6, state.charAt(1) - '0');
+
+            digitalWrite(LED_PIN3, state.charAt(2) - '0');
+            digitalWrite(LED_PIN4, state.charAt(3) - '0');
+
+            Serial.print("Установлено состояние для: "); 
+            Serial.println(input);
+        } 
+        
+        else {
+            Serial.println("Введите снова, нет такой комбинации: ");
+        }
+    }
+}
