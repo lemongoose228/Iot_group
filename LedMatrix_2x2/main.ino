@@ -29,3 +29,12 @@ const String states[] = {
     "11000100", // 123
     "10010100"  // 134
 };
+
+void setup() {
+    pinMode(LED_PIN5, OUTPUT);
+    pinMode(LED_PIN6, OUTPUT);
+    pinMode(LED_PIN3, OUTPUT);
+    pinMode(LED_PIN4, OUTPUT);
+    Serial.begin(9600);
+}
+
