@@ -3,7 +3,13 @@
 #define LED_PIN5 10
 #define LED_PIN6 11
 
-#define BLINK_INTERVAL 500
+#define BLINK_INTERVAL 5
+
+unsigned long previousMillis = 0;
+const long interval = 900;
+int currentState = 0;  
+bool isBlinking = false;
+bool toggle = false;
 
 const String combinationsOfLEDS[] = {
     "off", "on", "1", "2", "3", "4", 
@@ -41,31 +47,49 @@ void setup() {
 void loop() {
     if (Serial.available() > 0) {
         String input = Serial.readStringUntil('\n');
-        input.trim();
+        startBlinking(input);
+    }
+    if (isBlinking) {
+        blinkLEDs();
+    }
+}
 
-        int index = -1;
-        for (int i = 0; i < sizeof(combinationsOfLEDS) / sizeof(combinationsOfLEDS[0]); i++) {
-            if (input.equals(combinationsOfLEDS[i])) {
-                index = i;
-                break;
-            }
+void startBlinking(String input) {
+    for (int i = 0; i < sizeof(combinationsOfLEDS) / sizeof(combinationsOfLEDS[0]); i++) {
+        if (combinationMatches(input, combinationsOfLEDS[i])) {
+            currentState = i;
+            isBlinking = true;
+            previousMillis = millis();
+            break;
         }
+    }
+}
 
-        if (index != -1) {
-            String state = states[index];
+bool combinationMatches(String input, String combination) {
+    return input.equalsIgnoreCase(combination);
+}
 
-            digitalWrite(LED_PIN5, state.charAt(0) - '0');
-            digitalWrite(LED_PIN6, state.charAt(1) - '0');
+void blinkLEDs() {
+    unsigned long currentMillis = millis();
 
-            digitalWrite(LED_PIN3, state.charAt(2) - '0');
-            digitalWrite(LED_PIN4, state.charAt(3) - '0');
+    if (currentMillis - previousMillis >= BLINK_INTERVAL) {
+        previousMillis = currentMillis;
+        String currentPattern = states[currentState];
 
-            Serial.print("Установлено состояние для: "); 
-            Serial.println(input);
+        if (toggle) {
+            digitalWrite(LED_PIN3, currentPattern[0] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN4, currentPattern[1] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN5, currentPattern[2] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN6, currentPattern[3] == '1' ? HIGH : LOW);
         } 
         
         else {
-            Serial.println("Введите снова, нет такой комбинации: ");
+            digitalWrite(LED_PIN3, currentPattern[4] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN4, currentPattern[5] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN5, currentPattern[6] == '1' ? HIGH : LOW);
+            digitalWrite(LED_PIN6, currentPattern[7] == '1' ? HIGH : LOW);
         }
+
+        toggle = !toggle;
     }
 }
