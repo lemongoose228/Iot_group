@@ -68,3 +68,12 @@ void reset() {
         digitalWrite(columns[i], LOW); 
     }
 }
+
+void setup() {
+    for (int i = 0; i < SIZE; i++) {
+        pinMode(rows[i], OUTPUT); 
+    }
+    for (int i = 0; i < SIZE; i++) {
+        pinMode(columns[i], OUTPUT);
+    }
+}
