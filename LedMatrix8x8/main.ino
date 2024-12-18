@@ -77,3 +77,14 @@ void setup() {
         pinMode(columns[i], OUTPUT);
     }
 }
+
+void loop() {
+    for (int i = 0; i < SIZE; i++) {
+        showFrame(i, wow[i]); 
+        //showFrame(i, cute[i]);
+        //showFrame(i, bear[i]);
+        delay(1); 
+        reset(); 
+        delay(1); 
+    }
+}
