@@ -21,7 +21,7 @@ const int SIZE = 8;
 int rows[SIZE] = {r1, r2, r3, r4, r5, r6, r7, r8}; 
 int cols[SIZE] = {c1, c2, c3, c4, c5, c6, c7, c8};
 
-int pattern1[SIZE][SIZE] = {
+int wow[SIZE][SIZE] = {
     {0, 0, 0, 0, 0, 0, 0, 0},
     {0, 1, 1, 0, 0, 1, 1, 0},
     {0, 1, 1, 0, 0, 1, 1, 0},
@@ -32,7 +32,7 @@ int pattern1[SIZE][SIZE] = {
     {0, 1, 1, 1, 1, 1, 0, 0}
 };
 
-int pattern2[SIZE][SIZE] = {
+int cute[SIZE][SIZE] = {
     {0, 0, 0, 0, 0, 0, 0, 0},
     {0, 1, 0, 0, 0, 0, 1, 0},
     {1, 0, 1, 0, 0, 1, 0, 1},
