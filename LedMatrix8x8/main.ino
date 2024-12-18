@@ -49,3 +49,12 @@ void showFrame(int numberRow, int arr[SIZE]) {
         digitalWrite(columns[i], !arr[i]); 
     }
 }
+
+void reset() {
+    for (int i = 0; i < SIZE; i++) {
+        digitalWrite(rows[i], LOW); 
+    }
+    for (int i = 0; i < SIZE; i++){
+        digitalWrite(columns[i], LOW); 
+    }
+}
