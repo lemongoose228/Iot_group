@@ -53,6 +53,17 @@ int bear[SIZE][SIZE] = {
     {0, 0, 1, 1, 1, 1, 0, 0}
 };
 
+int love[SIZE][SIZE] = {
+    {0, 1, 0, 1, 0, 0, 0, 0},
+    {1, 0, 1, 0, 1, 0, 0, 0},
+    {1, 0, 0, 0, 1, 0, 0, 0},
+    {0, 1, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0}
+};
+
 void showFrame(int numberRow, int arr[SIZE]) {
     digitalWrite(rows[numberRow], HIGH); 
     for (int i = 0; i < SIZE; i++) {
