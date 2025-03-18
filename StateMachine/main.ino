@@ -8,3 +8,10 @@
 
 #define LEFT_SIDE_BACKWARD HIGH
 #define RIGHT_SIDE_BACKWARD HIGH
+
+void setup() {
+  for (int i = 4; i <= 7; i++) {
+    pinMode(i, OUTPUT);
+    digitalWrite(i, LOW);
+  }
+}
