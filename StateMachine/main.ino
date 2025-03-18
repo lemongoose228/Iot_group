@@ -62,3 +62,10 @@ void turn_right_onspot(int speed) {
 void move_only_right() {
   move(false, 0, true, 200);
 }
+
+void loop() {
+  turn_left_onspot(200);
+  //turn_left(200, 0.1);
+  //go_backward(200);
+  //move_only_right();
+}
