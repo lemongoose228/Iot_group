@@ -72,3 +72,15 @@ void process_button1_click() {
     button1_check = true;
   }
 }
+
+void loop() {
+  delay(100);
+
+  if (button1_check && digitalRead(BUTTON_PIN) == PRESSED) {
+      button1_counter++;
+      button1_check = false;
+      digitalWrite(LED_BUILTIN, HIGH); 
+      delay(50);                       
+      digitalWrite(LED_BUILTIN, LOW);
+  }
+}
