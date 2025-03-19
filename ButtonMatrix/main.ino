@@ -28,3 +28,24 @@ void process_button1_click();
 void check_state(int row);
 void print_message();
 void print_press_duration(int row, int col);
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), process_button1_click, FALLING);
+
+  cli(); 
+  DDRD = B00011100; 
+  PORTD = B11100000;
+
+  TCCR1A = 0;
+  TCCR1B = (1 << WGM12) | (1 << CS11) | (1 << CS10); 
+  OCR1A = (16000000 / 64 / 1000) * N;            
+  TIMSK1 |= (1 << OCIE1A);                   
+  sei();       
+
+  Serial.println("Startup complete.");  
+}
