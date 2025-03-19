@@ -23,7 +23,6 @@ bool have_difference = false;
 unsigned long press_start[3][3] = {{0}}; 
 unsigned long press_duration[3][3] = {{0}};
 
-
 void process_button1_click();
 void check_state(int row);
 void print_message();
@@ -50,15 +49,18 @@ void setup() {
   Serial.println("Startup complete.");  
 }
 
-
 ISR(TIMER1_COMPA_vect) {
   PORTD = B11111100; 
 
   if (cur_row == 1) {
     PORTD = B11111000; 
-  } else if (cur_row == 2) {
+  } 
+  
+  else if (cur_row == 2) {
     PORTD = B11110100; 
-  } else {
+  } 
+  
+  else {
     PORTD = B11101100; 
   }
 
@@ -96,7 +98,9 @@ void check_state(int row) {
     if (button_state[row][col] != button_state_old[row][col]) {
       if (button_state[row][col]) { 
         press_start[row][col] = millis();
-      } else { 
+      } 
+      
+      else { 
         press_duration[row][col] = millis() - press_start[row][col];
         print_press_duration(row, col);
       }
@@ -123,4 +127,14 @@ void print_message() {
     }
   }
   Serial.println();
+}
+
+void print_press_duration(int row, int col) {
+  Serial.print("The duration of the button press ");
+  Serial.print(row * 3 + col + 1); 
+  Serial.print(" - ");
+  Serial.print(press_duration[row][col]);
+  Serial.print(" ms, the beginning of the click in ");
+  Serial.print(press_start[row][col]);
+  Serial.println(" ms");
 }
