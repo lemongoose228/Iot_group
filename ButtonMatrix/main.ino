@@ -49,3 +49,26 @@ void setup() {
 
   Serial.println("Startup complete.");  
 }
+
+
+ISR(TIMER1_COMPA_vect) {
+  PORTD = B11111100; 
+
+  if (cur_row == 1) {
+    PORTD = B11111000; 
+  } else if (cur_row == 2) {
+    PORTD = B11110100; 
+  } else {
+    PORTD = B11101100; 
+  }
+
+  check_state(cur_row); 
+  cur_row = (cur_row % 3) + 1; 
+}
+
+void process_button1_click() {
+  if (!button1_check) {
+    button1_press_time = millis();
+    button1_check = true;
+  }
+}
