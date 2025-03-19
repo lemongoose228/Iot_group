@@ -84,3 +84,30 @@ void loop() {
       digitalWrite(LED_BUILTIN, LOW);
   }
 }
+
+void check_state(int row) {
+  row = row - 1; 
+
+  button_state[row][0] = !(PIND & (1 << COL1));
+  button_state[row][1] = !(PIND & (1 << COL2));
+  button_state[row][2] = !(PIND & (1 << COL3));
+
+  for (int col = 0; col < 3; col++) {
+    if (button_state[row][col] != button_state_old[row][col]) {
+      if (button_state[row][col]) { 
+        press_start[row][col] = millis();
+      } else { 
+        press_duration[row][col] = millis() - press_start[row][col];
+        print_press_duration(row, col);
+      }
+
+      button_state_old[row][col] = button_state[row][col]; 
+      have_difference = true;
+    }
+  }
+
+  if (have_difference) {
+    have_difference = false;
+    print_message();
+  }
+}
