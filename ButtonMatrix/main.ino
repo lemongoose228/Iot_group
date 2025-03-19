@@ -111,3 +111,16 @@ void check_state(int row) {
     print_message();
   }
 }
+
+void print_message() {
+  Serial.print("The matrix buttons are pressed: ");
+  for (int row = 0; row < 3; row++) {
+    for (int col = 0; col < 3; col++) {
+      if (button_state[row][col]) {
+        Serial.print(row * 3 + col + 1); 
+        Serial.print(" ");
+      }
+    }
+  }
+  Serial.println();
+}
