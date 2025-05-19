@@ -5,6 +5,13 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
+PORT = 'COM4'
+BAUD = 9600
+MIN_DIST = 10
+MAX_DIST = 30
+POLY_DEGREE = 3
+SAMPLES_NEEDED = 50
+
 def collect_data(min_dist, max_dist):
     ser = serial.Serial(PORT, BAUD, timeout=1)
     time.sleep(2)
