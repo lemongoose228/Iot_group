@@ -57,3 +57,7 @@ def show_plot(ir_values, distances, model, poly):
     plt.legend()
     plt.tight_layout()
     plt.show()
+
+def convert(ir_value, model, poly):
+    transformed = poly.transform([[ir_value]])
+    return model.predict(transformed)[0]
