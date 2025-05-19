@@ -42,3 +42,18 @@ def fit_model(ir_values, distances, degree):
     X_poly = poly.fit_transform(ir_values.reshape(-1, 1))
     model = LinearRegression().fit(X_poly, distances)
     return model, poly
+
+def show_plot(ir_values, distances, model, poly):
+    ir_sorted = np.sort(ir_values)
+    X_plot = poly.transform(ir_sorted.reshape(-1, 1))
+    y_plot = model.predict(X_plot)
+
+    plt.scatter(ir_values, distances, color='red', label='Измерения')
+    plt.plot(ir_sorted, y_plot, color='blue', label=f'Полином степени {POLY_DEGREE}')
+    plt.xlabel('IR-сигнал')
+    plt.ylabel('Расстояние (см)')
+    plt.title('Калибровка инфракрасного датчика')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
