@@ -1,3 +1,8 @@
+ #include <Wire.h>
+
+#define LED 13        
+#define SENSOR_ADDR 0x53
+
 void setup() { 
   Wire.begin(); 
   Serial.begin(9600);
