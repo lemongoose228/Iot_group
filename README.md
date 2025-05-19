@@ -14,3 +14,8 @@
 [LedMatrix_8x8](LedMatrix_8x8) - матрица 8 на 8 для отображения картинок
 
 [MorseShield](MorseShield) - азбука Морзе, проект для зачёта
+
+
+## 6 семестр
+
+[Акселерометр_невесомость](accelerometer_weightlessness)
