@@ -20,16 +20,19 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = duration * 0.0344 / 2;
-
-  irValue = analogRead(IR_SENSOR_PIN);
-
+  distance = getDistance();
+  irValue = analogRead(IR_PIN);
+  
   Serial.print(distance);
   Serial.print(",");
   Serial.println(irValue);
+  
+  storeDistance(distance);
+  
+  if (enoughVariety()) {
+    flashLED();
+    sampleCount = 0;
+  }
+
+  delay(100);
+}
