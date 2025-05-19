@@ -28,3 +28,25 @@ void readAccel(float &x, float &y, float &z) {
   y = rawY / 256.0;
   z = rawZ / 256.0;
 }
+
+void loop() {
+  float ax, ay, az;
+  readAccel(ax, ay, az);
+
+  Serial.print("X: "); Serial.print(ax);
+  Serial.print(" Y: "); Serial.print(ay);
+  Serial.print(" Z: "); Serial.println(az);
+
+  float total = abs(ax) + abs(ay) + abs(az);
+
+  if (total < 0.21) {
+    digitalWrite(LED, HIGH);
+    Serial.println("Невесомость!");
+  } 
+  
+  else {
+    digitalWrite(LED, LOW);
+  }
+
+  delay(20);
+}
