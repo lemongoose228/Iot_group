@@ -48,3 +48,9 @@ float getDistance() {
   return duration * 0.0343 / 2.0;
 }
 
+void storeDistance(float d) {
+  if (sampleCount < maxSamples) {
+    lastDistances[sampleCount++] = d;
+  }
+}
+
