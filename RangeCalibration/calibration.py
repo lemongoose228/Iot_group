@@ -30,3 +30,8 @@ def collect_data(min_dist, max_dist):
     ser.close()
     return np.array(ir_values), np.array(distances)
 
+def fit_model(ir_values, distances, degree):
+    poly = PolynomialFeatures(degree)
+    X_poly = poly.fit_transform(ir_values.reshape(-1, 1))
+    model = LinearRegression().fit(X_poly, distances)
+    return model, poly
