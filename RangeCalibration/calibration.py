@@ -61,3 +61,12 @@ def show_plot(ir_values, distances, model, poly):
 def convert(ir_value, model, poly):
     transformed = poly.transform([[ir_value]])
     return model.predict(transformed)[0]
+
+if __name__ == "__main__":
+    ir_vals, dist_vals = collect_data(MIN_DIST, MAX_DIST)
+    model, poly = fit_model(ir_vals, dist_vals, POLY_DEGREE)
+    show_plot(ir_vals, dist_vals, model, poly)
+
+    example = 500
+    result = convert(example, model, poly)
+    print(f"IR={example} => Расстояние ≈ {result:.2f} см")
