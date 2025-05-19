@@ -63,3 +63,12 @@ bool enoughVariety() {
   
   return (maxD - minD >= 0.9f * (maxD > 0 ? maxD : 1));
 }
+
+void flashLED() {
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(LED_PIN, HIGH);
+    delay(200);
+    digitalWrite(LED_PIN, LOW);
+    delay(200);
+  }
+}
