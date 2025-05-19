@@ -54,3 +54,12 @@ void storeDistance(float d) {
   }
 }
 
+bool enoughVariety() {
+  float minD = 9999, maxD = 0;
+  for (int i = 0; i < sampleCount; i++) {
+    if (lastDistances[i] < minD) minD = lastDistances[i];
+    if (lastDistances[i] > maxD) maxD = lastDistances[i];
+  }
+  
+  return (maxD - minD >= 0.9f * (maxD > 0 ? maxD : 1));
+}
