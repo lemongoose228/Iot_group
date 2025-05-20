@@ -1,5 +1,8 @@
 #include <Wire.h>
 
+String userMessage = "";
+bool sendLength = true;
+
 void setup() {
   Serial.begin(9600);
   Wire.begin(8); 
