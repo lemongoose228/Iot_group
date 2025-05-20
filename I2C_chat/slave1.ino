@@ -43,3 +43,16 @@ void receiveHandler(int howMany) {
   Serial.print("Received: ");
   Serial.println(incoming);
 }
+
+void requestHandler() {
+  if (userMessage.length() > 0) {
+    if (sendLength) {
+      Wire.write((uint8_t)userMessage.length());
+      sendLength = false;
+    } else {
+      Wire.write(userMessage.c_str(), userMessage.length());
+      sendLength = true;
+      userMessage = "";
+    }
+  }
+}
