@@ -6,6 +6,8 @@ bool sendLength = true;
 void setup() {
   Serial.begin(9600);
   Wire.begin(8); 
+  Wire.onReceive(receiveHandler);
+  Wire.onRequest(requestHandler);
   Serial.println("Petya (Slave 8) is ready");
 }
 
