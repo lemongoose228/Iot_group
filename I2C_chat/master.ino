@@ -44,3 +44,18 @@ void loop() {
   delay(500);
 }
 
+void sendMessage(uint8_t toAddress, String msg) {
+  Wire.beginTransmission(toAddress);
+  Wire.write((uint8_t)msg.length()); 
+  Wire.endTransmission();
+  delay(10);
+
+  Wire.beginTransmission(toAddress);
+  Wire.write(msg.c_str(), msg.length()); // точно по длине
+  Wire.endTransmission();
+
+  Serial.print("Send to ");
+  Serial.print(toAddress);
+  Serial.print(": ");
+  Serial.println(msg);
+}
