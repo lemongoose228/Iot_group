@@ -88,3 +88,12 @@ void sendMessage(uint8_t toAddress, String msg) {
   Serial.print(": ");
   Serial.println(msg);
 }
+
+int getNameIndexByAddress(uint8_t addr) {
+  for (int i = 0; i < 3; i++) {
+    if (slaveAddresses[i] == addr) {
+      return i;
+    }
+  }
+  return -1;
+}
