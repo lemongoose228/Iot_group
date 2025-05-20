@@ -1,5 +1,13 @@
 #include <Wire.h>
 
+struct Message {
+  uint8_t from;
+  uint8_t to;
+  String text;
+};
+
+Message lastMessage;
+
 const int slaveAddresses[] = {8, 9, 10}; 
 const char* names[] = {"Petya", "Vasya", "Masha"};
 
