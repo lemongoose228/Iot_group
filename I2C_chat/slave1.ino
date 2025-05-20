@@ -32,3 +32,14 @@ String readSerialMessage() {
   return message;
 }
 
+void receiveHandler(int howMany) {
+  String incoming = "";
+  for (int i = 0; i < howMany; i++) {
+    if (Wire.available()) {
+      char c = Wire.read();
+      incoming += c;
+    }
+  }
+  Serial.print("Received: ");
+  Serial.println(incoming);
+}
