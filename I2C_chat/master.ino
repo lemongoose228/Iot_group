@@ -44,6 +44,35 @@ void loop() {
   delay(500);
 }
 
+void handleIncomingMessage(uint8_t fromAddress, String rawMsg) {
+  int senderIndex = getNameIndexByAddress(fromAddress);
+
+  if (rawMsg.startsWith("@last:")) {
+    String replyText = rawMsg.substring(6);
+    replyText.trim();
+    String fullReply = String(names[senderIndex]) + ": " + replyText;
+    sendMessage(lastMessage.from, fullReply);
+  } else {
+    int colonIndex = rawMsg.indexOf(':');
+    if (colonIndex > 0) {
+      String destName = rawMsg.substring(0, colonIndex);
+      String msgText = rawMsg.substring(colonIndex + 1);
+      msgText.trim();
+
+      for (int j = 0; j < 3; j++) {
+        if (String(names[j]) == destName) {
+          String fullMsg = String(names[senderIndex]) + ": " + msgText;
+          sendMessage(slaveAddresses[j], fullMsg);
+
+          lastMessage.from = slaveAddresses[senderIndex];
+          lastMessage.to = slaveAddresses[j];
+          lastMessage.text = msgText;
+        }
+      }
+    }
+  }
+}
+
 void sendMessage(uint8_t toAddress, String msg) {
   Wire.beginTransmission(toAddress);
   Wire.write((uint8_t)msg.length()); 
