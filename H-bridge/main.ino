@@ -37,3 +37,12 @@ void loop() {
     }
   }
 }
+
+ void setMotorForward(int speed) {
+  speed = constrain(speed, 0, 255);
+  analogWrite(motorPinA, speed);
+  analogWrite(motorPinB, 0);
+  Serial.print("Вперёд со скоростью ");
+  Serial.println(speed);
+}
+
