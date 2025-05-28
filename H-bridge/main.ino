@@ -46,3 +46,16 @@ void loop() {
   Serial.println(speed);
 }
 
+void setMotorBackward(int speed) {
+  speed = constrain(speed, 0, 255);
+  analogWrite(motorPinA, 0);
+  analogWrite(motorPinB, speed);
+  Serial.print("Назад со скоростью ");
+  Serial.println(speed);
+}
+
+void stopMotor() {
+  analogWrite(motorPinA, 0);
+  analogWrite(motorPinB, 0);
+  Serial.println("Двигатель остановлен");
+}
